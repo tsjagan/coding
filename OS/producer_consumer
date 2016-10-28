@@ -1,0 +1,33 @@
+/*
+ * There are multuple producers and multiple consumers.
+ * Producers have to wait for empty slots in the shared buffer.
+ * Consumers have to wait for filled slots in the shared buffer.
+ * Buffer is shared and access to buffer has to synchronized.
+ */
+
+void producer()
+{
+    while ( true ) {
+        item = produce();
+        lock.acquire();
+        while ( buffer.full() ) {
+            full_cond.wait(lock);
+        }
+        buffer.add(item);
+        lock.release();
+        empty_cond.notify_all();
+    }
+}
+
+void consumer()
+{
+    while ( true ) {
+        lock.acquire();
+        while ( buffer.empty() ) {
+            empty_cond.wait(lock);
+        }
+        item = buffer.next_item();
+        lock.release();
+        full_cond.notify_all();
+    }
+}
