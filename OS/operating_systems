@@ -2,3 +2,4 @@
 2. signals are posted by kernel to the process by faking an activation record
 3. system calls are traps (special instruction that sets mode bit)
 4. exceptions are erroneous cases by divide by zero and stuff
+5. interrupts are generally for hardware

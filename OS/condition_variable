@@ -1,0 +1,40 @@
+- used to wait/signal thread waiting for a particular condition
+- producer/consumer is a classic example
+- can be implemented using locks/semaphores
+
+class ConditionVariable {
+    public:
+        // waits till some thread wakes this up
+        void wait(Lock client_lock) {
+            current = Threading.current();
+            wait_q.lock();
+            wait_q.enqueue(current);
+            wait_q.release();
+            client_lock.release();
+            sleep();
+            client_lock.acquire();
+        }
+
+        // signals one waiting thread if any
+        void signal() {
+            wait_q.lock();
+            if ( wait_q.size() > 0 ) {
+                next = wait_q.dequeue();
+                next.wakeup();
+            }
+            wait_q.releas();
+        }
+
+        // signals all waiting threads if any
+        void broadcast() {
+            wait_q.lock();
+            if ( wait_q.size() > 0 ) {
+                // in a loop
+                next.wakeup();
+            }
+            wait_q.release();
+        }
+    private:
+        wait_q;
+        wait_q_lock;
+};
