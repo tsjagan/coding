@@ -1,0 +1,45 @@
+- Deadlock prevention
+- If there is any possibility of a deadlock, then deny resource request
+- Process has to declare maximum needed resources
+- On each resource request, check if system is in a safe state
+- its in safe state, if it can allocated resources to all other processes
+  and get to the finish all of them in some order
+- Example:
+  - total 12 units of resource R, availabe = 3, allocated = 9 (5+2+2)
+  - P0 max: 10 current: 5
+  - P1 max:  4 current: 2
+  - P2 max:  9 current: 2
+  - At this point, system is in safe state <p1,p0,p2>
+    - allocate 2R to p1, then p1 is done.
+      So, (available-(p1max-p1current)) + p1max = 5 available
+    - allocate 5R to p0, then p0 is done.
+      So, (available-(p0max-p0current)) + p0max = 10 available
+    - allocate 7R to p2, then p2 is done.
+      So, (available-(p2max-p2current)) + p2max = 12 available
+  - If p2 requests 1 unit of R, then allocating it would push to unsafe state
+    - available = (3-1) = 2
+    - allocate 2R to p1, then p1 is done.
+      - (available-(p1max-p1current)) + p1max. available = 4
+    - Now, (available-(p1max-p1current)) is -ve for p1 and p2 both. So unsafe.
+
+bool bankers()
+{
+    max[processes][resource]
+    allocated[process][resource]
+    total[resources]
+    available[resources]
+
+    for each resource:
+        available[resource] = total[resource] - sum_processes(allocated, resource)
+
+    given a process and request
+    update allocated[process][resource]
+
+    for each process:
+        - for each process:
+            - check if max - allocated can be fullfilled
+            - if yes, then update available += allocated
+            - remove process from processes
+            - break
+        - if no such process then return false
+}
