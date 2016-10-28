@@ -1,0 +1,32 @@
+- synchronized counting variables
+
+
+class Semaphore {
+    public:
+        Semaphore ( ) : count_(0) { }
+        P () {
+            while ( true ) {
+                while ( test_and_set(lock) == LOCKED );
+                if ( count_ > 0 ) {
+                    count_--;
+                    lock = UNLOCKED;
+                    break;
+                } else {
+                    // add to queue
+                    lock_ = UNLOCKED;
+                    // put to sleep
+                }
+             }
+        }
+        V () {
+            while ( test_and_set(lock) == LOCKED );
+            count_++;
+            wake up if queue not empty
+            lock = UNLOCKED;
+        }
+    private:
+        static const int UNLOCKED = 0;
+        static const int LOCKED = 1;
+        int lock_ = UNLOCKED;
+        uint32_t count_;
+};
