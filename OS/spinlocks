@@ -1,0 +1,21 @@
+- should be used for short critical sections
+- cpu will spin when waiting to enter the critical section
+
+LOCKED = 1
+UNLOCKED = 0
+
+lock = UNLOCKED
+acquire()
+{
+    while ( true ) {
+        while ( lock == LOCKED ); // read only
+        if ( test_and_set(lock) == UNLOCKED ) {
+            break;
+        }
+    }
+}
+
+release()
+{
+    lock  = UNLOCKED;
+}
