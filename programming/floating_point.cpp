@@ -10,6 +10,7 @@ void print_bits(double a)
     uint64_t shifter = 1;
     uint64_t raw = 0;
     memcpy(&raw, &a, sizeof(double));
+    cout << " Binary representation of " << a << " is : " << endl;
     for ( uint16_t i = 0; i < 64; i++ ) {
         uint16_t bit = (raw & shifter) == 0 ? 0 : 1;
         cout << bit << " ";
@@ -31,8 +32,10 @@ void endianness()
 
 int main(void)
 {
-    double a = -1.0;
     endianness();
+    double a = 0.2;
+    print_bits(a);
+    a = 1 / 5.0;
     print_bits(a);
     return 0;
 }
