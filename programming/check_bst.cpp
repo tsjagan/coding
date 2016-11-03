@@ -1,3 +1,13 @@
+/*
+ * 3 bit integers
+ * largest number is 0 sign bit followed by all 1's
+ * smallest number is 1 sign bit then all 0's
+ * 000 ---  0
+ * 001 ---  1, -1 --- 111
+ * 010 ---  2, -2 --- 110
+ * 011 --   3, -3 --- 101
+               -4 --- 100
+ */
 
 start = smallest_32bit_signed_number = (1 << 31);
 end = largest_32bit_signed_number = (0x7fffffff);
