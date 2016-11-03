@@ -10,6 +10,36 @@ int _longest_pallindrome(string& str, int start, int end, int32_t& max);
 example: b d a b c c b a c a b d a d a c
 */
 
+int dp_longest_pallindrome(string& str)
+{
+    int max = 0;
+    int cache[str.size()][str.size()];
+    for ( int i = 0; i < str.size(); i++ ) {
+        cache[i][i] = 1;
+    }
+    for ( int i = 1; i < str.size(); i++ ) {
+        for ( int j = 0; j < str.size(); j++ ) {
+            if ( i+j > str.size()-1 ) {
+                break;
+            }
+            if ( str[j] != str[i+j] ) {
+                cache[j][i+j] = 0;
+            } else {
+                if ( i == 1 ) {
+                    cache[j][i+j] = 2;
+                } else {
+                    cache[j][i+j] =
+                        ((cache[j+1][i+j-1] == 0) ? 0 : cache[j+1][i+j-1] + 2);
+                }
+            }
+            if ( max < cache[j][i+j] ) {
+                max = cache[j][i+j];
+            }
+        }
+    }
+    return max;
+}
+
 int32_t longest_pallindrome(string& str)
 {
     static int32_t max = 0;
@@ -37,7 +67,6 @@ int _longest_pallindrome(string& str, int start, int end, int32_t& max)
                 if ( ret == substr_len ) {
                     cache[subentry] = ret + 2;
                     if ( max < (ret+2) ) {
-                        cout << "Pallindrome from " << i << " to " << j << endl;
                         max = ret + 2;
                     }
                 }
@@ -53,5 +82,6 @@ int main(void)
     cout << "Entr string : ";
     cin >> str; 
     cout << "Longest pallindrome = " << longest_pallindrome(str) << endl;
+    cout << "Longest pallindrome = " << dp_longest_pallindrome(str) << endl;
     return 0;
 }
