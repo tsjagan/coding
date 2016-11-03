@@ -1,0 +1,12 @@
+- Throughput:
+   Maximum rate of productions/processing. this is the maximum number
+   of requests that can be processed in a unit of time.
+
+- Latency:
+  Time required to process a single request (response time)
+
+- IOPS:
+  IO operations per second = ( 1 / (latency+seek time) of the disk).
+  - Here latency is the time it takes for the sector of disk to rotate
+    into position under the head (rotational latency).
+  - Seek time is the time it takes for the head to come under correct track.
