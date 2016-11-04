@@ -22,15 +22,58 @@
 #include <stdint.h>
 #include <string>
 
-using namespace std;
-using Tree = std::string;
+#include "complete_binary_tree.h"
 
-int set_bit(Tree& tree, uint32_t offset, uint32_t length)
+using namespace std;
+
+void _propagate(Tree& tree, uint32_t index)
 {
+    uint32_t parent = index;
+    while ( parent >= 0 ) {
+        uint32_t sibling = -1, parent = 0;
+        char bit = '0';
+        int ret = get_sibling(tree, index, sibling);
+        if ( ret == -1 && index < tree.size()-1 ) {
+            break;
+        }
+        if ( index == tree.size()-1 ) {
+            sibling = index;
+        }
+        if ( tree[sibling] == '1' and tree[index] == '1') {
+            bit = '1';
+        }
+        ret = get_parent(tree, index, parent);
+        if ( ret == -1 ) {
+            break;
+        }
+        tree[parent] = bit;
+        index = parent;
+    }
+}
+
+int set_bit(Tree& tree, uint32_t offset, uint32_t length, char bit='1')
+{
+    if ( offset < 0 ) {
+        return -1;
+    }
+    uint32_t end = offset + length - 1;
+    if ( end > tree.size()-1 ) {
+        return -1;
+    }
+    while ( offset <= end ) {
+        tree[offset] = bit;
+        if ( offset+1 > end ) {
+            tree[offset+1] = bit;
+        }
+        _propagate(tree, offset);
+        offset += 2;
+    }
+    return 0;
 }
 
 int clear_bit(Tree& tree, uint32_t offset, uint32_t length)
 {
+    return set_bit(tree, offset, length, '0');
 }
 
 int main(void)
@@ -39,6 +82,14 @@ int main(void)
     cout << "Enter the tree bits : ";
     cin >> tree;
     
-    set_bit(tree, 1 2);
+    set_bit(tree, tree.size()-1, 1);
+    cout << "Tree is : " << tree << endl;
+
+    clear_bit(tree, tree.size()-1, 1);
+    cout << "Tree is : " << tree << endl;
+
+    set_bit(tree, tree.size()-2, 2);
+    cout << "Tree is : " << tree << endl;
+
     return 0;
 }
