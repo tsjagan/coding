@@ -60,17 +60,14 @@ int set_bit(Tree& tree, uint32_t offset, uint32_t length, char bit='1')
     if ( end > tree.size()-1 ) {
         return -1;
     }
-    if ( is_right_child(offset) == true ) {
-        tree[offset] = bit;
-        _propagate(tree, offset);
-        offset++;
-    }
     while ( offset <= end ) {
         tree[offset] = bit;
         if ( offset+1 <= end ) {
             tree[offset+1] = bit;
         }
         _propagate(tree, offset);
+        if ( is_right_child(tree, offset) == true ) {
+        }
         offset += 2;
     }
     return 0;
