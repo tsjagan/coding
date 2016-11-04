@@ -4,35 +4,33 @@
 
 using namespace std;
 
-double precision = 0.2;
-void _draw_quadrant1(double radius, double sx, double sy)
-{
-    double end = sx + radius;
-    while ( sx < end ) {
-        cout << sx << " " << sy << " ";
-        sy += precision;
-        sx += precision;
-    }
-    cout << endl;
-}
+double precision = 0.1;
 
-void draw_circle(double radius, double cx, double cy)
+void draw_circle(double radius)
 {
-    _draw_quadrant1(radius, cx-radius, cy-radius);
-    //_draw_quadrant2(radius, cx+radius, cy+radius);
-    //_draw_quadrant3(radius, cx+radius, cy);
-    //_draw_quadrant4(radius, cx-radius, cy-radius);
+    // From (-r,0) to (0,r),
+    // x+=precision, y+=precision
+    // radius - (x - radius)
+    // -(y)
+    double i = 0;
+    double sx = radius, sy = 0; 
+    while ( i <= (radius/precision) ) {
+        cout << "First  : (" << -sx << "," << sy << "), ";
+        cout << "Second : (" << sx << "," << sy << "), ";
+        cout << "Third  : (" << -sx << "," << -sy << "), ";
+        cout << "Fourth : (" << sx << "," << -sy << ")";
+        sy += precision;
+        sx -= precision;
+        i++;
+        cout << endl;
+    }
 }
 
 int main(void)
 {
-    double cx = 0, cy = 0, radius = 0;
-    cout << "Enter center x :";
-    cin >> cx;
-    cout << "Enter center x :";
-    cin >> cy;
+    double radius = 0;
     cout << "Enter radius:";
     cin >> radius;
-    draw_circle(radius, cx, cy);
+    draw_circle(radius);
     return 0;
 }

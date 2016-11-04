@@ -5,18 +5,30 @@
 
 using namespace std;
 
-void print_bits(double a)
+void print_bits(float a)
 {
-    uint64_t shifter = 1;
-    uint64_t raw = 0;
-    memcpy(&raw, &a, sizeof(double));
-    cout << " Binary representation of " << a << " is : " << endl;
-    for ( uint16_t i = 0; i < 64; i++ ) {
+    uint32_t shifter = 1;
+    uint32_t raw = 0;
+    memcpy(&raw, &a, sizeof(float));
+
+    cout << "Mantissa is : " << endl;
+    for ( uint16_t i = 0; i < 23; i++ ) {
         uint16_t bit = (raw & shifter) == 0 ? 0 : 1;
         cout << bit << " ";
         shifter <<= 1;
     }
     cout << endl;
+    cout << "Exponent is : ";
+    for ( uint16_t i = 0; i < 8; i++ ) {
+        uint16_t bit = (raw & shifter) == 0 ? 0 : 1;
+        cout << bit << " ";
+        shifter <<= 1;
+    }
+    cout << endl;
+    cout << "sign bit is : ";
+    uint16_t bit = (raw & shifter) == 0 ? 0 : 1;
+    cout << bit << " " << endl;
+    shifter <<= 1;
 }
 
 void endianness()
@@ -33,9 +45,10 @@ void endianness()
 int main(void)
 {
     endianness();
-    double a = 0.2;
+    float a = 1.02;
     print_bits(a);
-    a = 1 / 5.0;
+
+    a = 1.02;
     print_bits(a);
     return 0;
 }
