@@ -1,0 +1,4 @@
+- g++ --fdump-class-hierarchy code.cpp
+- this will generate code.number.class file which has class layouts
+- This class file can be prettified using below,
+- c++filt < code.number.class > prettu_class_file
