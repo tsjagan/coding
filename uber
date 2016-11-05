@@ -1,0 +1,11 @@
+1. Constant time random access hash implementation
+2. Efficient elevator API
+3. Ransom note
+4. Median of k unsorted arrays
+5. Design of a task scheduler
+6. Custom comparator
+7. Given an array of Ints find a maximum sum of non adjacent elements.
+   For ex. arr = [1,0,3,9,2] then ans would be 10 = 1 + 9 (non adjacent element) 
+8. Expression evaluation
+9. Maximum subsequence
+10.Overlapping meeting times 
