@@ -1,10 +1,16 @@
-Constant time random access hash implementation
-Ransom note
-Median of k unsorted arrays
-Custom comparator
-Expression evaluation
-Maximum subsequence
 Overlapping meeting times 
+Expression evaluation
+ - http://www.manojagarwal.co.in/evaluation-of-infix-expression/
+ - http://quiz.geeksforgeeks.org/stack-set-4-evaluation-postfix-expression/
+ - infix, prefix, postfix
+ - expression conversion
+   - http://scanftree.com/Data_Structure/
+   - infix to postfix/prefix: shunting yard wiki
+Constant time random access hash implementation
+Custom comparator
+Median of k unsorted arrays
+- Ransom note
+- Maximum subsequence
 - Given an array of Ints find a maximum sum of non adjacent elements.
    For ex. arr = [1,0,3,9,2] then ans would be 10 = 1 + 9 (non adjacent element) 
 - Efficient elevator API
