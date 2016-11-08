@@ -36,7 +36,7 @@ int edit_distance(string& s1, string& s2)
         // 1. We can either remove this character -> 1 + d[i][j-1]
         // ex: s1 = akc, s2 = def, i = 2, j = 2. If we delete s1[i] from s1,
         // then we have to convert "ak" to "def" to get our result
-        d[i][j] = 1 + std::min(d[i][j-1], d[i-1][j], d[i-1][j-1]);
+        d[i][j] = 1 + std::min(std::min(d[i][j-1], d[i-1][j]), d[i-1][j-1]);
       }
     }
   }
@@ -49,7 +49,7 @@ int main(void)
   cout << "Enter string 1 : ";
   cin >> s1;
 
-  cout << "Enter string 2 :";
+  cout << "Enter string 2 : ";
   cin >> s2;
 
   cout << edit_distance(s1, s2) << endl;
