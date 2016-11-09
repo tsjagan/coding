@@ -3,7 +3,7 @@
 
 class Semaphore {
     public:
-        Semaphore ( ) : count_(0) { }
+        Semaphore (max ) : count_(max) { }
         P () {
             while ( true ) {
                 while ( test_and_set(lock) == LOCKED );
