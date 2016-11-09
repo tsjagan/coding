@@ -30,3 +30,28 @@ class Semaphore {
         int lock_ = UNLOCKED;
         uint32_t count_;
 };
+
+class Semaphore {
+  public:
+    Semaphore(max) : count_(max) { }
+    P() {
+      // want to wait till count becomes non-zero
+      lock.acquire()
+      while ( count_ == 0 ) {
+        cond_var.wait(lock);
+      }
+      count_--;
+      lock.release();
+    }
+
+    V() {
+      lock.acquire();
+      count++;
+      cond_var.signal();
+      lock.release();
+    }
+  private:
+    lock;
+    ConditionVar cond;
+    int count_;
+};
