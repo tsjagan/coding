@@ -2,6 +2,9 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix stack 
 
+combinations: combinations.cpp
+	g++ --std=c++11 combinations.cpp -o /tmp/practice/combinations -g
+
 check_ordering: check_ordering.cpp
 	g++ --std=c++11 check_ordering.cpp -o /tmp/practice/check_ordering -g
 
