@@ -1,6 +1,9 @@
 all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
-	 normalize_path pallindromes_in_string quick_sort spiral_matrix stack 
+	 normalize_path pallindromes_in_string quick_sort spiral_matrix stack
+
+4sum: 4sum.cpp
+	g++ --std=c++11 4sum.cpp -o /tmp/practice/4sum -g
 
 combinations: combinations.cpp
 	g++ --std=c++11 combinations.cpp -o /tmp/practice/combinations -g
