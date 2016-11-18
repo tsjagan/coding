@@ -3,6 +3,9 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum
 
+is_number: string_is_number.cpp
+	g++ --std=c++11 string_is_number.cpp -o /tmp/practice/is_number -g
+
 2sum: two_sum.cpp
 	g++ --std=c++11 two_sum.cpp -o /tmp/practice/2sum -g
 
