@@ -26,6 +26,7 @@ using Hash = std::map<int, std::pair<int, int>>;
 /*
  * Four numbers such that (a + b) = -(c + d)
  * 1 8 2 10 21 -11 0 13
+ * -11 0 1 2 8 10 23 21
  */
 void four_sum(IntArray& numbers)
 {
