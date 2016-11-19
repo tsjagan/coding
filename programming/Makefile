@@ -3,6 +3,9 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum stack is_number running_maximum heap
 
+encoding: check_encoding.cpp
+	g++ --std=c++11 check_encoding.cpp -o /tmp/practice/encoding -g
+
 heap: test_heap.cpp
 	g++ --std=c++11 test_heap.cpp -o /tmp/practice/heap -g
 
