@@ -1,7 +1,13 @@
 all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
-	 4sum 2sum stack is_number
+	 4sum 2sum stack is_number running_maximum heap
+
+heap: test_heap.cpp
+	g++ --std=c++11 test_heap.cpp -o /tmp/practice/heap -g
+
+running_maximum: running_maximum.cpp
+	g++ --std=c++11 running_maximum.cpp -o /tmp/practice/running_maximum -g
 
 is_number: string_is_number.cpp
 	g++ --std=c++11 string_is_number.cpp -o /tmp/practice/is_number -g

@@ -1,9 +1,6 @@
 #ifndef __BINARY_TREE_H_
 #define __BINARY_TREE_H_
 
-#include <string>
-
-using Tree = std::string;
 
 /*
  *   1l 1R 2L 2R 3L 3R 4L
@@ -28,6 +25,7 @@ bool is_left_child(uint32_t index)
     return false;
 }
 
+template  <typename Tree>
 int get_left_child(Tree& tree, uint32_t index, uint32_t& res)
 {
     res = (2*index) + 1;
@@ -37,6 +35,7 @@ int get_left_child(Tree& tree, uint32_t index, uint32_t& res)
     return 0;
 }
 
+template  <typename Tree>
 int get_right_child(Tree& tree, uint32_t index, uint32_t& res)
 {
     res = (2*index) + 2;
@@ -46,6 +45,7 @@ int get_right_child(Tree& tree, uint32_t index, uint32_t& res)
     return 0;
 }
 
+template  <typename Tree>
 int get_parent(Tree& tree, uint32_t index, uint32_t& res)
 {
     // 0 is the root
@@ -63,6 +63,7 @@ int get_parent(Tree& tree, uint32_t index, uint32_t& res)
     return 0;
 }
 
+template  <typename Tree>
 int get_sibling(Tree& tree, uint32_t index, uint32_t& res)
 {
     // root doesnt have a sibling 

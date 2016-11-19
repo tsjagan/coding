@@ -25,14 +25,15 @@
 #include "complete_binary_tree.h"
 
 using namespace std;
+using Tree = std::string;
 
 void _propagate(Tree& tree, uint32_t index)
 {
     uint32_t parent = index;
-    while ( parent >= 0 ) {
+    while ( true ) {
         uint32_t sibling = -1, parent = 0;
         char bit = '0';
-        int ret = get_sibling(tree, index, sibling);
+        int ret = get_sibling<Tree>(tree, index, sibling);
         if ( ret == -1 && index < tree.size()-1 ) {
             break;
         }
@@ -42,7 +43,7 @@ void _propagate(Tree& tree, uint32_t index)
         if ( tree[sibling] == '1' and tree[index] == '1') {
             bit = '1';
         }
-        ret = get_parent(tree, index, parent);
+        ret = get_parent<Tree>(tree, index, parent);
         if ( ret == -1 ) {
             break;
         }
@@ -53,9 +54,6 @@ void _propagate(Tree& tree, uint32_t index)
 
 int set_bit(Tree& tree, uint32_t offset, uint32_t length, char bit='1')
 {
-    if ( offset < 0 ) {
-        return -1;
-    }
     uint32_t end = offset + length - 1;
     if ( end > tree.size()-1 ) {
         return -1;

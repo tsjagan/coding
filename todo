@@ -20,6 +20,6 @@
 - stack peekMax, peekMin
 - replace all patterns in a string
 - insert node in complete binary tree
-- check is number has integer square root
+- check if number has integer square root
 - convert tree to mirror
 - isomorphic strings
