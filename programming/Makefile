@@ -1,7 +1,10 @@
 all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
-	 4sum 2sum stack is_number running_maximum heap
+	 4sum 2sum stack is_number running_maximum heap roman_decimal
+
+roman_decimal: roman_to_decimal.cpp
+	g++ --std=c++11 roman_to_decimal.cpp -o /tmp/practice/roman_decimal -g
 
 encoding: check_encoding.cpp
 	g++ --std=c++11 check_encoding.cpp -o /tmp/practice/encoding -g
