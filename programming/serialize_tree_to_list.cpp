@@ -9,12 +9,12 @@
 
 using namespace std;
 
-ll::LinkedList::Ptr serialize_to_list(bst::BST::Ptr tree)
+ll::SinglyLinkedList::Ptr serialize_to_list(bst::BST::Ptr tree)
 {
   if ( tree->root() == nullptr ) {
     return (nullptr);
   }
-  ll::LinkedList::Ptr list = std::make_shared<ll::LinkedList>(tree->root()->value_);
+  ll::SinglyLinkedList::Ptr list = std::make_shared<ll::SinglyLinkedList>(tree->root()->value_);
   return _serialize_to_list(tree->root(), list->head())
 }
 /*
