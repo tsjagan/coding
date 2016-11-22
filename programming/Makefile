@@ -2,7 +2,7 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
-	 doubly_ll
+	 doubly_ll isomorphic
 
 doubly_ll: doubly_ll.cpp
 	g++ --std=c++11 doubly_ll.cpp -o /tmp/practice/doubly_ll -g
@@ -27,6 +27,9 @@ is_number: string_is_number.cpp
 
 4sum: 4sum.cpp
 	g++ --std=c++11 4sum.cpp -o /tmp/practice/4sum -g
+
+isomorphic: isomorphic.cpp
+	g++ --std=c++11 isomorphic.cpp -o /tmp/practice/isomorphic -g
 
 combinations: combinations.cpp
 	g++ --std=c++11 combinations.cpp -o /tmp/practice/combinations -g
