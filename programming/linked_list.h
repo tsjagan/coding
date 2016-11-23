@@ -24,6 +24,9 @@ public:
   using Ptr = std::shared_ptr<SinglyLinkedList>;
   SinglyLinkedList() : head_(nullptr) { }
   SinglyLinkedList(Node::Ptr n) : head_(n), curr_(nullptr) { }
+  int add(int n) {
+    return this->add(std::make_shared<Node>(n));
+  }
   int add(Node::Ptr n) {
     if ( head_ == nullptr ) {
       head_ = n;

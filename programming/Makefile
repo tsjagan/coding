@@ -4,6 +4,9 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
 	 doubly_ll isomorphic
 
+merge_ll: merge_sorted_ll.cpp
+	g++ --std=c++11 merge_sorted_ll.cpp -o /tmp/practice/merge_ll -g
+
 doubly_ll: doubly_ll.cpp
 	g++ --std=c++11 doubly_ll.cpp -o /tmp/practice/doubly_ll -g
 
