@@ -4,6 +4,9 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
 	 doubly_ll isomorphic replace_string permute
 
+select: string_combinations.cpp
+	g++ --std=c++11 string_combinations.cpp -o /tmp/practice/select -g
+
 permute: string_permutation.cpp
 	g++ --std=c++11 string_permutation.cpp -o /tmp/practice/permute -g
 
