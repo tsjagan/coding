@@ -2,7 +2,10 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
-	 doubly_ll isomorphic
+	 doubly_ll isomorphic replace_string
+
+replace_string: replace_string.cpp
+	g++ --std=c++11 replace_string.cpp -o /tmp/practice/replace_string -g
 
 merge_ll: merge_sorted_ll.cpp
 	g++ --std=c++11 merge_sorted_ll.cpp -o /tmp/practice/merge_ll -g
