@@ -2,7 +2,10 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 longest_abs_filepath longest_pallindrome_subsequence max_subsequence non_adjecent_max_sum \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
-	 doubly_ll isomorphic replace_string permute
+	 doubly_ll isomorphic replace_string permute select
+
+range: range.cpp
+	g++ --std=c++11 range.cpp -o /tmp/practice/range -g
 
 select: string_combinations.cpp
 	g++ --std=c++11 string_combinations.cpp -o /tmp/practice/select -g
