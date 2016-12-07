@@ -74,13 +74,13 @@ class Table {
         Distance move_left(BallId id, double count) {
             Ball& b = balls_[id];
             b.current() -= count;
-            cout << "Moved ball : " << id << " to " << b.current() << endl;
+            //cout << "Moved ball : " << id << " to " << b.current() << endl;
             return count;
         }
         Distance move_right(int id, double count) {
             Ball& b = balls_[id];
             b.current() += count;
-            cout << "Moved ball : " << id << " to " << b.current() << endl;
+            //cout << "Moved ball : " << id << " to " << b.current() << endl;
             return count;
         }
         Distance solve() {
@@ -89,6 +89,7 @@ class Table {
                 Colliders col;
                 auto d = this->next_collision(col);
                 this->move(d, col);
+                cout << this->ToStr() << endl;
                 total += d;
             }
             return total;
@@ -98,14 +99,10 @@ class Table {
             for ( int i = 0; i < s; i++ ) {
                 this->move(i, count);
             }
-            if ( col.first == 0 ) {
-                if ( balls_[0] == LEFT ) {
-                    balls_.erase(balls_.begin());
-                }
-            } else if ( col.first == balls_.size()-1 ) {
-                if ( balls_[col.first] == RIGHT ) {
-                    balls_.erase(balls_.end()-1);
-                }
+            if ( col.first == -1 ) {
+                balls_.erase(balls_.begin());
+            } else if ( col.first == balls_.size() ) {
+                balls_.erase(balls_.end()-1);
             } else {
                 balls_[col.first].change_direction();
                 balls_[col.second].change_direction();
@@ -125,9 +122,9 @@ class Table {
                 }
                 if ( d < min_d ) {
                     if ( i == -1 ) {
-                        col = std::make_pair(0, 0);
+                        col = std::make_pair(-1, -1);
                     } else if ( i == balls_.size()-1 ) {
-                        col = std::make_pair(balls_.size()-1, balls_.size()-1);
+                        col = std::make_pair(balls_.size(), balls_.size());
                     } else {
                         col = std::make_pair(i, i+1);
                     }
@@ -174,14 +171,7 @@ int main(void)
     table.add_ball(Ball(40, LEFT));
     cout << table.ToStr() << endl;
 
-    Colliders col;
-    auto d = table.next_collision(col);
-    table.move(d, col);
-    cout << table.ToStr() << endl;
-
-    d = table.next_collision(col);
-    table.move(d, col);
-    cout << table.ToStr() << endl;
+    table.solve();
 
     return 0;
 }
