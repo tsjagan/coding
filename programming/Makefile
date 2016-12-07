@@ -3,7 +3,10 @@ all: check_ordering buddy_bitmap draw_circle edit_distance floating_point \
 	 normalize_path pallindromes_in_string quick_sort spiral_matrix \
 	 4sum 2sum stack is_number running_maximum heap roman_decimal \
 	 doubly_ll isomorphic replace_string permute select range matrix_path \
-	 longest_pallindrome_substring
+	 longest_pallindrome_substring moving_points
+
+moving_points : moving_points.cpp
+	g++ --std=c++11 moving_points.cpp -o /tmp/practice/moving_points -g
 
 longest_pallindrome_substring: longest_pallindrome.cpp
 	g++ --std=c++11 longest_pallindrome.cpp -o /tmp/practice/longest_pallindrome_substring -g
