@@ -1,37 +1,61 @@
 #include <stdlib.h>
 #include <iostream>
-#include <vector>
 #include <map>
+#include <algorithm>
+
+#include "median.h"
 
 using namespace std;
-using Arrays = vector<vector<int>>;
-
-void quick_select()
-{
-
-}
+using Arrays = vector<Array>;
 
 int median_arrays(Arrays& arrays)
 {
-    // Naive 1:
-    // sort all individual arrays
-    // merge into a new large array
-    // return middle of the large array
-
-    // Naive 2:
-    // Put all in new large array unsorted
-    // return quick_select(large)
-    // Complexity: O(2N) = O(N)
-
-
-    // smart 1: more space not needed
-    // sort individual arrays
-    // find median of each
-    // from smallest median, remove all smaller elements
-    // from largest median, remove all larger elements
-
+    int total = 0;
     for ( auto& arr: arrays ) {
-        std::sort(arr.begin(), arr.end());
+        total += arr.size();
+    }
+
+    int median_pos = (total/2);
+    int i = 0;
+    while ( true ) {
+        for ( auto& arr: arrays ) {
+            Select::print(arr);
+        }
+        cout << "Finding : " << median_pos << endl;
+        std::pair <int, int> smallest = std::make_pair(-1, 0x7FFFFFFF);
+        for ( auto& arr: arrays ) {
+            int pos = Select::median(arr);
+            cout << "Select of array = " << arr[pos] << endl;
+            if ( arr[pos] < smallest.second  ) {
+                smallest = std::make_pair(pos, arr[pos]);
+            }
+        }
+        int smaller = 0;
+        for ( auto& arr: arrays ) {
+            auto it = std::remove_if(
+                arr.begin(), arr.end(), 
+                [&](int x)->bool{
+                    if ( x < smallest.second ) {
+                        smaller++;
+                        return true;
+                    }
+                    return false;
+                });
+            arr.erase(it, arr.end());
+        }
+        median_pos = median_pos - smaller;
+        if ( median_pos == 0 ) {
+            return smallest.second;
+        }
+        if ( smaller == 0 ) {
+            Array tmp;
+            for ( auto& arr: arrays ) {
+                tmp.insert(tmp.begin(), arr.begin(), arr.end());
+            }
+            Select::print(tmp);
+            cout << "Returning " << median_pos << endl;
+            return Select::select(tmp, median_pos);
+        }
     }
     return 0;
 }
@@ -39,16 +63,32 @@ int median_arrays(Arrays& arrays)
 int main(void)
 {
     Arrays arr = {
-        --> -2 1 2 3 3 4 5 6 7 9 10 11 12 14 18 19 22 --> 7
-        // finding 9th
-        // removed 5 smallest, 5 largest
-        // finding 4th
-        // removed 3 smallest
-        // smallest median = 4th = overall median
-        vector<int>{5, 2, 1, 3, 10, 14, 18},  --> 10
-        vector<int>{19, -2, 11, 3, 12},       --> 11 
-        vector<int>{9, 22, 4, 6, 7}       --> 7 9
+        // -2, 1, 2, 3, 3, 4, 6, 9, 10, 11, 12, 14, 17, 18, 19, 22
+        vector<int>{2, 1, 3, 10, 14, 18},
+        vector<int>{19, -2, 11, 3, 12},
+        vector<int>{9, 17, 4, 6, 22}
     };
+
+    cout << "*************" << endl;
+    cout << "Median of arrays = " << median_arrays(arr) << endl;
+
+    cout << "*************" << endl;
+    for ( auto& a: arr ) {
+        Select::print(a);
+        cout << "Median is = " << a[Select::median(a)] << endl;
+    }
+
+    cout << "*************" << endl;
+    for ( auto& a: arr ) {
+        Select::print(a);
+        cout << "First is = " << a[Select::select(a, 0)] << endl;
+    }
+
+    cout << "*************" << endl;
+    for ( auto& a: arr ) {
+        Select::print(a);
+        cout << "Second is = " << a[Select::select(a, 1)] << endl;
+    }
 
     return 0;
 }
