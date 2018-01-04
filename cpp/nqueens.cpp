@@ -39,39 +39,22 @@ Nqueens(int n, Queens& queens)
     }
 
     bool res = false;
-    Pos last = (queens.size() > 0) ? queens.back() : make_pair(0,0);
-    for (int i = last.first; i < n; i++) {
-        int j = (i == last.first) ? last.second : 0;
-        for (; j < n; j++) {
-            Pos curr = make_pair(i,j);
-            if (queens.size() == 0) {
-                queens.push_back(curr);
-                res = Nqueens(n, queens);
-                if (res == false) {
-                    queens.pop_back();
-                }
-            } else {
-                bool clash = false;
-                for (int q = 0; q < queens.size(); q++) {
-                    if (CheckStraight(curr, queens[q]) or
-                        CheckDiagonal(curr, queens[q])) {
-                        clash = true;
-                        break;
-                    }
-                }
-                if (clash == false) {
-                    queens.push_back(curr);
-                    res = Nqueens(n, queens);
-                    if (res == false) {
-                        cout << "Clash popping " << curr.first
-                            << " " << curr.second << " - Queen number "
-                            << queens.size() << endl;;
-                        queens.pop_back();
-                    }
-                }
+    Pos last = (queens.size() > 0) ? queens.back() : make_pair(-1,0);
+    for (int j = 0; j < n; j++) {
+        Pos curr = make_pair(last.first+1,j);
+        bool clash = false;
+        for (int q = 0; q < queens.size(); q++) {
+            if (CheckStraight(curr, queens[q]) or
+                CheckDiagonal(curr, queens[q])) {
+                clash = true;
+                break;
             }
-            if (res == true) {
-                return res;
+        }
+        if (clash == false) {
+            queens.push_back(curr);
+            res = Nqueens(n, queens);
+            if (res == false) {
+                queens.pop_back();
             }
         }
     }
@@ -81,7 +64,7 @@ Nqueens(int n, Queens& queens)
 int main(void)
 {
     Queens q;
-    Nqueens(8, q);
+    Nqueens(4, q);
     vector<vector<string>> res;
     for (int i = 0; i < q.size(); i++) {
         cout << q[i].first << " " << q[i].second << endl;
