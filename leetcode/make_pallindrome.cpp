@@ -12,13 +12,6 @@ For example, given 'waterrfetawx' and a k of 2, you could delete f and x to get 
 
 using namespace std;
 
-bool is_palindrome(const string& str, int st, int end) {
-    while (st < end and str[st] == str[end]) {
-        st++;
-        end--;
-    }
-    return (st == end);
-}
 
 // absfgsba 
 bool _edits_to_palindrome(string& str, int left, int right, int k) {
