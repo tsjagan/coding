@@ -29,6 +29,7 @@ then dp[i] = A[i] + max(dp[j] for all j from <i - B> to <i - 2B>);
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <deque>
 #include "utils.h"
 #include "timer.h"
 #include "utils.h"
@@ -39,12 +40,22 @@ using namespace std;
 
 int pick_elements(const vector<int>& A, int B) {
   int n = A.size();
-  vector<int> dp(n, A[0]);
+  vector<int> dp(n);
+  deque<int> dq;
 
-  for (int i = 1; i < n; i++) {
-    for (int j = (i - B); j >= 0 and j >= (i - 2*B); j--) {
-      dp[i] = max(dp[i], A[i] + dp[j]);
+  // need max of B elements at each step
+
+  for (int i = 0; i < n; i++) {
+    if (i < B) {
+      dp[i] = A[0];
+    } else {
+      dp[i] = A[i] + *max_element(dq.begin(), dq.begin() + B);
     }
+    cout << "Res at " << i << " = " << dp[i] << endl;
+    if (i > 2*B and dq.size() >= B) {
+      dq.pop_front();
+    }
+    dq.push_back(dp[i]);
   }
 
   return dp[n-1];
